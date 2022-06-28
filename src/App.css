@@ -381,7 +381,8 @@ h1 {
 }
 .pitch-comment{
   text-align: center;
-  border: 1px solid red;
+  width: 600px;
+
 }
 
 .disabled {
