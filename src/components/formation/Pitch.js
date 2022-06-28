@@ -21,7 +21,6 @@ export default function Pitch(props) {
 
   return (
     <div>
-      {console.log("items", items)}
       <Rnd
         bounds=".Main_pitch"
         default={{
@@ -41,7 +40,7 @@ export default function Pitch(props) {
              src={items.playerImage}
             alt={items.playerName}
           />
-          <p>{items.playerName}</p>
+          <p>{items.playerPost}</p>
         </div>
       </Rnd>
     </div>

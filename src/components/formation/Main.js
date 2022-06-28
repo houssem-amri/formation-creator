@@ -1,11 +1,4 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  createRef,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Hero from "../Hero";
 import Pitch from "./Pitch";
 import pitch from "./Pitch.png";
@@ -43,6 +36,9 @@ function getStyles(name, personName, theme) {
 export default function Main() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const [Comment, setComment] = React.useState("");
+  const [playerPost, setplayerPost] = useState("");
+
   const ref = useRef(null);
   const connected_user = JSON.parse(localStorage.getItem("connected_user"));
   const [Players, setPlayers] = useState([]);
@@ -86,11 +82,16 @@ export default function Main() {
         console.log(err);
       });
   }, [ref]);
+  const handleChangePost = (post) => {
+    let T = [];
+    for (let i = 0; i < Players.length; i++) {
+      if (Players[i].playerPost === post) {
+        T.push(Players[i]);
+      }
 
-
-
- 
-
+    }
+    setPlayers(T)
+  };
   return (
     <div className="Pitch_main_bc">
       <Hero title="Formation Creator" />
@@ -99,9 +100,46 @@ export default function Main() {
           <div className="row">
             <div className="col-lg-4">
               <div className="form-group">
-                <FormControl sx={{ m: 1, width: "100%" }}>
+                <select
+                  type="text"
+                  className="form-control"
+                  placeholder="Player post"
+                  onChange={(e) => handleChangePost(e.target.value)}
+                >
+                  <option style={{ color: "black" }} value="">
+                    Select Player Post
+                  </option>
+                  <option style={{ color: "black" }} value="GK">
+                    GK
+                  </option>
+                  <option style={{ color: "black" }} value="CB">
+                    CB
+                  </option>
+                  <option style={{ color: "black" }} value="LB">
+                    LB
+                  </option>
+                  <option style={{ color: "black" }} value="RB">
+                    RB
+                  </option>
+                  <option style={{ color: "black" }} value="CM">
+                    CM
+                  </option>
+                  <option style={{ color: "black" }} value="LW">
+                    LW
+                  </option>
+                  <option style={{ color: "black" }} value="RW">
+                    RW
+                  </option>
+                  <option style={{ color: "black" }} value="ST">
+                    ST
+                  </option>
+                </select>
+              </div>
+              <div className="form-group">
+                <FormControl sx={{ width: "100%" }}>
                   <InputLabel id="demo-multiple-chip-label">Players</InputLabel>
                   <Select
+                    className="select-mui"
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"
                     multiple
@@ -112,13 +150,14 @@ export default function Main() {
                     }
                     renderValue={(selected) => (
                       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                        {console.log("selected", selected)}
                         {selected.map((value) => (
                           <Chip
                             key={value._id}
                             label={value.playerName}
-                            color="success"
-                            variant="outlined"
+                            style={{
+                              backgroundColor: "#ee1e46",
+                              color: "white",
+                            }}
                           />
                         ))}
                       </Box>
@@ -137,18 +176,35 @@ export default function Main() {
                   </Select>
                 </FormControl>
               </div>
+
+              <div className="form-group">
+                <textarea
+                  type="text"
+                  className="form-control"
+                  placeholder="Comment"
+                  onChange={(e) => setComment(e.target.value)}
+                />
+              </div>
             </div>
             <div className="col-lg-8 Main_pitch">
-              <button type="button" onClick={onButtonClick}>
+              <div className="form-group">
+                <input
+                  type="button"
+                  className="btn btn-primary py-3 px-5"
+                  defaultValue="Download Image"
+                  onClick={onButtonClick}
+                />
+              </div>
+              {/* <button type="button" onClick={onButtonClick}>
                 download
-              </button>
+              </button> */}
               <div ref={ref}>
-                  <img src={pitch} alt="pitch" className="pitch-image" />
-                  {personName.map((player) => (
-                    <Pitch items={player} />
-                  ))}
-                </div>
-              
+                <img src={pitch} alt="pitch" className="pitch-image" />
+                {personName.map((player) => (
+                  <Pitch items={player} Comment={Comment} />
+                ))}
+                <h4 className="pitch-comment">{Comment}</h4>
+              </div>
             </div>
           </div>
         </div>

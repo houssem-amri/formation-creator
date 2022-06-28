@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Hero from "./Hero";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Add_match() {
   const [teamOne, setteamOne] = useState("");
@@ -12,6 +12,7 @@ export default function Add_match() {
   const [imageTwo, setimageTwo] = useState("");
   const connected_user = JSON.parse(localStorage.getItem("connected_user"));
   let {id} = useParams();
+  let navigate=useNavigate()
 
   useEffect(() => {
     console.log(id);
@@ -61,6 +62,7 @@ export default function Add_match() {
       .put("http://localhost:3200/api/matches/"+ id, formData)
       .then((response) => {
         console.log("response ", response.data);
+        navigate('/Matches')
       })
       .catch((error) => {
         console.log("error", error);
@@ -108,7 +110,7 @@ export default function Add_match() {
                   <input
                     type="button"
                     className="btn btn-primary py-3 px-5"
-                    defaultValue="Register"
+                    defaultValue="Edit Match"
                     onClick={handleSubmit}
                   />
                 </div>

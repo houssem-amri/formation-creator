@@ -15,7 +15,7 @@
 }
 
 .Pitch_main_bc{
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 }
 
 h1 {
@@ -371,11 +371,17 @@ h1 {
 
 .PlayerCard p {
   text-transform: uppercase;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  /* text-shadow: 0 2px 4px rgb(255, 254, 254); */
+  color: #ececec;
   width: 100%;
   margin: 0;
   font-size: 16px;
   user-select: none;
+  text-align: center;
+}
+.pitch-comment{
+  text-align: center;
+  border: 1px solid red;
 }
 
 .disabled {

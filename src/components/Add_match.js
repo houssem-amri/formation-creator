@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Hero from "./Hero";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Add_match() {
   const [teamOne, setteamOne] = useState("");
@@ -10,6 +11,7 @@ export default function Add_match() {
   const [imageOne, setimageOne] = useState("");
   const [imageTwo, setimageTwo] = useState("");
   const connected_user=JSON.parse(localStorage.getItem("connected_user"))
+  let navigate=useNavigate()
 
 const onChangeImageOne=(event)=>{
     const file = event.target.files[0];
@@ -36,7 +38,7 @@ const onChangeImageTwo=(event)=>{
     .post("http://localhost:3200/api/add_matches", formData)
     .then((response) => {
         console.log("response ", response.data);
-
+        navigate('/Matches')
     })
     .catch((error) => {
       console.log("error", error);

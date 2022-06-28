@@ -37,6 +37,7 @@ router.post("/add_players", multer({ storage: storage }).single("playerImage") ,
     const player = new Player({
         playerName: req.body.playerName,
         playerPost: req.body.playerPost,
+        playerNumber: req.body.playerNumber,
         playerImage: url + "/images/" + req.file.filename,
         userId: req.body.userId,
     });
@@ -98,6 +99,7 @@ router.put(
       _id: req.params.id,
       playerName: req.body.playerName,
       playerPost: req.body.playerPost,
+      playerNumber: req.body.playerNumber,
       playerImage: image,
       userId: req.body.userId,
     };

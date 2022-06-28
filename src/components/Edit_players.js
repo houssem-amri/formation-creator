@@ -7,6 +7,7 @@ export default function Edit_players() {
   const [playerName, setplayerName] = useState("");
   const [playerPost, setplayerPost] = useState("");
   const [playerImage, setplayerImage] = useState("");
+  const [playerNumber, setplayerNumber] = useState("");
 
   const connected_user = JSON.parse(localStorage.getItem("connected_user"));
   let { id } = useParams();
@@ -23,6 +24,7 @@ export default function Edit_players() {
         setplayerName(player.playerName);
         setplayerPost(player.playerPost);
         setplayerImage(player.playerImage);
+        setplayerNumber(player.playerNumber);
       })
       .catch((error) => {
         console.log("error", error);
@@ -39,6 +41,7 @@ export default function Edit_players() {
     formData.append("playerName", playerName);
     formData.append("playerPost", playerPost);
     formData.append("playerImage", playerImage);
+    formData.append("playerNumber", playerNumber);
     formData.append("userId", connected_user.id);
 
     console.log(formData);
@@ -78,6 +81,16 @@ export default function Edit_players() {
                     placeholder="Player post"
                     value={playerPost || ""}
                     onChange={(e) => setplayerPost(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Player post"
+                    onChange={(e) => setplayerNumber(e.target.value)}
+                    value={playerNumber || ""}
+
                   />
                 </div>
                 <div className="form-group">
