@@ -42,6 +42,7 @@ export default function Main() {
   const ref = useRef(null);
   const connected_user = JSON.parse(localStorage.getItem("connected_user"));
   const [Players, setPlayers] = useState([]);
+  const [dataPlayers, setDataPlayers] = useState([]);
   useEffect(() => {
     getAllPlayers();
   }, []);
@@ -50,7 +51,7 @@ export default function Main() {
       .get("http://localhost:3200/api/players_by_userId/" + connected_user.id)
       .then((response) => {
         console.log("response ", response.data);
-        setPlayers(response.data.data);
+        setDataPlayers(response.data.data);
       })
       .catch((error) => {
         console.log("error", error);
@@ -84,9 +85,9 @@ export default function Main() {
   }, [ref]);
   const handleChangePost = (post) => {
     let T = [];
-    for (let i = 0; i < Players.length; i++) {
-      if (Players[i].playerPost === post) {
-        T.push(Players[i]);
+    for (let i = 0; i < dataPlayers.length; i++) {
+      if (dataPlayers[i].playerPost === post) {
+        T.push(dataPlayers[i]);
       }
 
     }
