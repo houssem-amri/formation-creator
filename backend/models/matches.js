@@ -9,7 +9,7 @@ const matchSchema=mongoose.Schema({
     eventDate:String,
     imageOne:String,
     imageTwo:String,
-    userId:String,
+    userId:{ type: String, ref: 'User' },
 });
 const match=mongoose.model('Match',matchSchema)
 

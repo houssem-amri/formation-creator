@@ -29,6 +29,25 @@ const MIME_TYPE = {
     },
   });
 
+
+// get all Players
+router.get("/get_Players", (req, res) => {
+  console.log("here into get all matches ");
+
+  Player.find().populate({
+    path: "userId",
+  })
+  .exec(function (err, docs) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).json({
+        data: docs,
+      });
+    }
+  });
+});
+
 // add Player 
 router.post("/add_players", multer({ storage: storage }).single("playerImage") ,(req, res) => {
 

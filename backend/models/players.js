@@ -7,7 +7,7 @@ const matchSchema=mongoose.Schema({
     playerPost:String,
     playerNumber:String,
     playerImage:String,
-    userId:String,
+    userId:{ type: String, ref: 'User' },
 });
 const match=mongoose.model('Player',matchSchema)
 

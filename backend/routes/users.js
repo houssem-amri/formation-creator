@@ -41,17 +41,17 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// router.get("/get_user", (req, res) => {
-//     User.find((err, docs) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         res.status(200).json({
-//           data: docs,
-//         });
-//       }
-//     });
-//   });
+router.get("/get_users", (req, res) => {
+    User.find((err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({
+          data: docs,
+        });
+      }
+    });
+  });
 
 //   router.get("/get_user_byId/:id", (req, res) => {
 //     User.findOne({ _id: req.params.id }).then((findedObject) => {

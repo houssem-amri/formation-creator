@@ -30,19 +30,25 @@ const storage = multer.diskStorage({
 });
 
 // get all matches
-router.get("/matches", (req, res) => {
+router.get("/get_Matches", (req, res) => {
   console.log("here into get all matches ");
 
-  Match.find((err, docs) => {
+  Match.find().populate({
+    path: "userId",
+  })
+  .exec(function (err, docs) {
     if (err) {
-      console.log("here error ", err);
+      console.log(err);
     } else {
       res.status(200).json({
         data: docs,
       });
     }
   });
+
 });
+
+// get  matches BY USER ID
 router.get("/matches_by_userId/:id", (req, res) => {
   console.log("here into get all matches ");
   Match.find({ userId: req.params.id }).then((findedObject) => {
@@ -53,6 +59,8 @@ router.get("/matches_by_userId/:id", (req, res) => {
     }
   });
 });
+
+// Add  matches BY USER ID
 router.post(
   "/add_matches",
   multer({ storage: storage }).fields([

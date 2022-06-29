@@ -72,26 +72,43 @@ export default function Header(props) {
                           </a>
                         </li>
                       </Fragment>
-                    ) : (
+                    ): role === "admin" ?(
                       <Fragment>
                         <li>
-                          <Link to="/" className="nav-link">
-                            Home
+                          <Link to="/admin_Users" className="nav-link">
+                            Users
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="/admin_Matches" className="nav-link">
+                            Matches
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="/admin_Players" className="nav-link">
+                            Players
                           </Link>
                         </li>
 
-                        <li>
-                          <Link to="login" className="nav-link">
-                            Login
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="register" className="nav-link">
-                            Register
-                          </Link>
-                        </li>
                       </Fragment>
-                    )}
+                    ):( <Fragment>
+                      <li>
+                        <Link to="/" className="nav-link">
+                          Home
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link to="login" className="nav-link">
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="register" className="nav-link">
+                          Register
+                        </Link>
+                      </li>
+                    </Fragment>)}
                   </ul>
                 </nav>
                 <a

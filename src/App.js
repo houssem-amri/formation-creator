@@ -15,6 +15,9 @@ import Add_players from "./components/Add_players";
 import Players from "./components/Players";
 import Main from "./components/formation/Main";
 import Edit_players from "./components/Edit_players";
+import List_users from "./components/List_users";
+import List_Matches from "./components/List_Matches";
+import List_players from "./components/List_players";
 
 function App() {
   const [role, setRole] = useState(null);
@@ -23,12 +26,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setRole(auth.Auth)
+    setRole(auth.Auth);
     console.log("auth.Auth");
     dispatch(refreshToken());
-  }, [dispatch,auth]);
-
-
+  }, [dispatch, auth]);
 
   return (
     // <Home/>
@@ -45,10 +46,14 @@ function App() {
               <Route path="Matches" element={<Matches />} />
               <Route path="Players" element={<Players />} />
               <Route path="Add_player" element={<Add_players />} />
-              <Route path="Main_pitch:id" element={<Main/>} />
+              <Route path="Main_pitch:id" element={<Main />} />
             </Fragment>
           ) : role === "admin" ? (
-            <Fragment></Fragment>
+            <Fragment>
+              <Route path="admin_Users" element={<List_users />} />
+              <Route path="admin_Matches" element={<List_Matches />} />
+              <Route path="admin_Players" element={<List_players />} />
+            </Fragment>
           ) : (
             <Fragment>
               <Route path="register" element={<Register />} />
